@@ -15,6 +15,24 @@ library(cansim)
 
 
 
+
+## Person-count
+
+https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1110001801
+
+After-tax low income status of tax filers and dependants based on Census Family Low Income Measure (CFLIM-AT), by family type and family type composition
+
+Frequency: Annual
+
+Table: 11-10-0018-01 (formerly CANSIM 111-0046)
+
+Release date: 2022-08-09
+
+Geography: Province or territory, Census metropolitan area, Census agglomeration, Census metropolitan area part, Census agglomeration part
+
+
+## Family count
+
 https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1110002001
 
 
@@ -52,5 +70,25 @@ ls(df_cflim)
 df_cflim %>% 
   distinct(census_family_type)
 
+df_cflim %>% 
+  distinct(family_type_composition)
+
 ```
 
+
+
+```{r}
+df_cflim %>% 
+  filter(uom == "Number",
+         census_family_type == "All census families in low income",
+         geo == "Victoria, British Columbia") %>% 
+  filter(family_type_composition != "Family types with or without children")
+
+ggplot(df_cflim, aes(x = ref_date, y = val_norm, colour = family_type_composition)) +
+  geom_point()
+```
+
+
+Victoria 2020
+
+Family types
