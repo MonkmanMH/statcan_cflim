@@ -53,7 +53,7 @@ Geography: Province or territory, Census metropolitan area, Census agglomeration
 df_cflim <- get_cansim("1110002001")
 
 df_cflim <- df_cflim %>% 
-  janitor::clean_names()
+  janitor::clean_names() 
 
 #write_rds(df_cflim, here::here("data_output", "df_cflim.rds"))
 #write_csv(df_cflim, here::here("data_output", "df_cflim.csv"))
@@ -77,18 +77,22 @@ df_cflim %>%
 
 
 
-```{r}
-df_cflim %>% 
+```{r df_victoria}
+df_cflim_victoria <- df_cflim %>% 
   filter(uom == "Number",
          census_family_type == "All census families in low income",
          geo == "Victoria, British Columbia") %>% 
   filter(family_type_composition != "Family types with or without children")
 
-ggplot(df_cflim, aes(x = ref_date, y = val_norm, colour = family_type_composition)) +
-  geom_point()
+df_cflim_victoria
+
 ```
 
 
-Victoria 2020
+```{r ch_victoria}
 
-Family types
+ggplot(df_cflim_victoria, aes(x = date, y = val_norm, colour = family_type_composition)) +
+  geom_line()
+```
+
+
