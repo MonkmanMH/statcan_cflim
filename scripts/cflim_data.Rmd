@@ -1,0 +1,56 @@
+---
+title: "CFLIM"
+author: "Martin Monkman"
+date: '2022-08-18'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+
+library(cansim)
+```
+
+
+
+https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1110002001
+
+
+After-tax low income status of census families based on Census Family Low Income Measure (CFLIM-AT), by family type and family composition
+
+Frequency: Annual
+
+Table: 11-10-0020-01 (formerly CANSIM 111-0047)
+
+Release date: 2022-08-09
+
+Geography: Province or territory, Census metropolitan area, Census agglomeration, Census metropolitan area part, Census agglomeration part
+
+
+
+```{r}
+
+df_cflim <- get_cansim("1110002001")
+
+df_cflim <- df_cflim %>% 
+  janitor::clean_names()
+
+#write_rds(df_cflim, here::here("data_output", "df_cflim.rds"))
+#write_csv(df_cflim, here::here("data_output", "df_cflim.csv"))
+
+```
+
+```{r}
+
+ls(df_cflim)
+
+```
+
+```{r}
+df_cflim %>% 
+  distinct(census_family_type)
+
+```
+
